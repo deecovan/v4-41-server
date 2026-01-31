@@ -1,0 +1,543 @@
+1
+00:00:00,000 --> 00:00:01,199
+so basically what i have here is a
+
+2
+00:00:01,199 --> 00:00:03,280
+system that saves each part of the map
+
+3
+00:00:03,280 --> 00:00:03,600
+as
+
+4
+00:00:03,600 --> 00:00:05,359
+a scene and loads it as a chunk
+
+5
+00:00:05,359 --> 00:00:07,279
+surrounding the player for this example
+
+6
+00:00:07,279 --> 00:00:07,759
+i'm just
+
+7
+00:00:07,759 --> 00:00:09,840
+using squares that display a random
+
+8
+00:00:09,840 --> 00:00:11,679
+color so this video is mainly just going
+
+9
+00:00:11,679 --> 00:00:13,040
+to be an overview video
+
+10
+00:00:13,040 --> 00:00:15,280
+i'll just be explaining how the code
+
+11
+00:00:15,280 --> 00:00:16,800
+works
+
+12
+00:00:16,800 --> 00:00:18,400
+so the first thing that i want to show
+
+13
+00:00:18,400 --> 00:00:20,480
+you is the world saved script
+
+14
+00:00:20,480 --> 00:00:22,640
+which as you can see is a singleton this
+
+15
+00:00:22,640 --> 00:00:24,480
+singleton stores the data for each chunk
+
+16
+00:00:24,480 --> 00:00:25,199
+in the map
+
+17
+00:00:25,199 --> 00:00:27,359
+in two linked arrays basically what i
+
+18
+00:00:27,359 --> 00:00:29,519
+mean by two linked arrays is just that
+
+19
+00:00:29,519 --> 00:00:30,960
+the elements that are added into the
+
+20
+00:00:30,960 --> 00:00:32,800
+arrays are added at the same time
+
+21
+00:00:32,800 --> 00:00:34,239
+therefore they share the exact same
+
+22
+00:00:34,239 --> 00:00:35,920
+index so as you can see in the add
+
+23
+00:00:35,920 --> 00:00:36,880
+function
+
+24
+00:00:36,880 --> 00:00:38,960
+the chunks coordinates is passed in and
+
+25
+00:00:38,960 --> 00:00:41,440
+stored in the loaded coordinates array
+
+26
+00:00:41,440 --> 00:00:43,200
+and an empty array is added into the
+
+27
+00:00:43,200 --> 00:00:44,719
+chunk data array
+
+28
+00:00:44,719 --> 00:00:46,399
+basically what that does is that it adds
+
+29
+00:00:46,399 --> 00:00:48,480
+an empty array for a chunk with that
+
+30
+00:00:48,480 --> 00:00:49,120
+specific
+
+31
+00:00:49,120 --> 00:00:51,440
+chunk coordinates that basically means
+
+32
+00:00:51,440 --> 00:00:52,879
+that the trunk coordinates can serve as
+
+33
+00:00:52,879 --> 00:00:54,719
+a key which is going to access
+
+34
+00:00:54,719 --> 00:00:56,719
+the data in the chunk data array with
+
+35
+00:00:56,719 --> 00:00:58,239
+the exact same index
+
+36
+00:00:58,239 --> 00:01:00,239
+as you can see in this save and retrieve
+
+37
+00:01:00,239 --> 00:01:02,160
+functions the coordinates are used to
+
+38
+00:01:02,160 --> 00:01:04,159
+access the data in the chunk data array
+
+39
+00:01:04,159 --> 00:01:05,680
+and now for the node itself that will
+
+40
+00:01:05,680 --> 00:01:08,320
+contain each part of the map
+
+41
+00:01:08,320 --> 00:01:10,400
+in this scene we just have a color rect
+
+42
+00:01:10,400 --> 00:01:11,439
+and a label
+
+43
+00:01:11,439 --> 00:01:12,960
+the colorectal is used to display the
+
+44
+00:01:12,960 --> 00:01:14,960
+color and the label is used to display
+
+45
+00:01:14,960 --> 00:01:15,360
+the
+
+46
+00:01:15,360 --> 00:01:17,360
+chunk coordinates inside the chunk node
+
+47
+00:01:17,360 --> 00:01:19,439
+script it has a function called starts
+
+48
+00:01:19,439 --> 00:01:21,520
+which passes in its trunk coordinates
+
+49
+00:01:21,520 --> 00:01:22,880
+then it checks if that coordinates has
+
+50
+00:01:22,880 --> 00:01:24,400
+already been loaded before
+
+51
+00:01:24,400 --> 00:01:26,159
+and if it has then it retrieves the data
+
+52
+00:01:26,159 --> 00:01:27,759
+for that exact coordinates
+
+53
+00:01:27,759 --> 00:01:29,200
+and if it hasn't then to add that
+
+54
+00:01:29,200 --> 00:01:30,880
+coordinates and then generate a new
+
+55
+00:01:30,880 --> 00:01:31,840
+color and that
+
+56
+00:01:31,840 --> 00:01:34,000
+color is then saved into an array and
+
+57
+00:01:34,000 --> 00:01:35,920
+finally we have the save function
+
+58
+00:01:35,920 --> 00:01:38,000
+this function basically saves data into
+
+59
+00:01:38,000 --> 00:01:39,759
+the world save singleton
+
+60
+00:01:39,759 --> 00:01:41,600
+and then deletes the chunk from the
+
+61
+00:01:41,600 --> 00:01:42,799
+scene tree
+
+62
+00:01:42,799 --> 00:01:44,479
+lastly in our main world we have the
+
+63
+00:01:44,479 --> 00:01:45,920
+player character on the camera and
+
+64
+00:01:45,920 --> 00:01:47,439
+inside the world script which is the
+
+65
+00:01:47,439 --> 00:01:49,200
+script that handles the chunk loading we
+
+66
+00:01:49,200 --> 00:01:51,280
+have a chunk node preload
+
+67
+00:01:51,280 --> 00:01:52,840
+and a reference to the player on some
+
+68
+00:01:52,840 --> 00:01:55,200
+variables
+
+69
+00:01:55,200 --> 00:01:57,119
+first we have the render distance then
+
+70
+00:01:57,119 --> 00:01:59,360
+the chunk size then the current chunk
+
+71
+00:01:59,360 --> 00:02:00,960
+which stores the chunk coordinates of
+
+72
+00:02:00,960 --> 00:02:03,360
+the player and the previous chunk which
+
+73
+00:02:03,360 --> 00:02:05,040
+starts to play as previous chunk
+
+74
+00:02:05,040 --> 00:02:05,840
+coordinates
+
+75
+00:02:05,840 --> 00:02:07,680
+and now we have two arrays one that
+
+76
+00:02:07,680 --> 00:02:09,039
+stores the coordinates of the chunks
+
+77
+00:02:09,039 --> 00:02:09,840
+that have been loaded
+
+78
+00:02:09,840 --> 00:02:11,360
+and the other that stores the chunk
+
+79
+00:02:11,360 --> 00:02:12,879
+nodes that have been loaded so on the
+
+80
+00:02:12,879 --> 00:02:14,319
+ready function we just make a reference
+
+81
+00:02:14,319 --> 00:02:14,959
+to the player
+
+82
+00:02:14,959 --> 00:02:16,720
+then we get the current chunk by using
+
+83
+00:02:16,720 --> 00:02:18,720
+the get chunk coordinates function
+
+84
+00:02:18,720 --> 00:02:20,239
+and then we pass in our play as global
+
+85
+00:02:20,239 --> 00:02:22,959
+position this function returns the
+
+86
+00:02:22,959 --> 00:02:25,680
+player's position in trunk coordinates
+
+87
+00:02:25,680 --> 00:02:27,360
+so then in our process function we check
+
+88
+00:02:27,360 --> 00:02:29,200
+if the previous chunk is not equal to
+
+89
+00:02:29,200 --> 00:02:30,640
+the current chunk which basically means
+
+90
+00:02:30,640 --> 00:02:32,160
+that the player has moved from one chunk
+
+91
+00:02:32,160 --> 00:02:32,800
+to another
+
+92
+00:02:32,800 --> 00:02:34,959
+and in that case we then call the load
+
+93
+00:02:34,959 --> 00:02:36,080
+chunk function
+
+94
+00:02:36,080 --> 00:02:37,680
+so in our load chunk function the first
+
+95
+00:02:37,680 --> 00:02:39,120
+thing we want to do is get our render
+
+96
+00:02:39,120 --> 00:02:40,640
+bounds
+
+97
+00:02:40,640 --> 00:02:42,480
+our render bounds is basically the size
+
+98
+00:02:42,480 --> 00:02:44,160
+of our two-dimensional array which is
+
+99
+00:02:44,160 --> 00:02:45,840
+determined by a render distance using
+
+100
+00:02:45,840 --> 00:02:47,440
+this formula
+
+101
+00:02:47,440 --> 00:02:48,800
+basically what that means is that when
+
+102
+00:02:48,800 --> 00:02:50,560
+our render distance is one we want to
+
+103
+00:02:50,560 --> 00:02:51,040
+make a
+
+104
+00:02:51,040 --> 00:02:52,879
+three by three grid and when our render
+
+105
+00:02:52,879 --> 00:02:54,560
+distance is two we'd want to make a five
+
+106
+00:02:54,560 --> 00:02:55,519
+by five grid
+
+107
+00:02:55,519 --> 00:02:58,080
+and so on then we'll calculate the
+
+108
+00:02:58,080 --> 00:02:59,920
+coordinates of each chunk using this
+
+109
+00:02:59,920 --> 00:03:01,519
+formula and then offset it by the
+
+110
+00:03:01,519 --> 00:03:05,519
+player's current strong coordinates
+
+111
+00:03:05,519 --> 00:03:06,720
+and after that we'll add it to the
+
+112
+00:03:06,720 --> 00:03:08,480
+loading chunk array which stores the
+
+113
+00:03:08,480 --> 00:03:09,680
+coordinates for the chunks that are
+
+114
+00:03:09,680 --> 00:03:11,120
+supposed to be surrounding the player
+
+115
+00:03:11,120 --> 00:03:12,400
+then we'll check if the coordinates of
+
+116
+00:03:12,400 --> 00:03:14,080
+the chunk that is about to be loaded has
+
+117
+00:03:14,080 --> 00:03:15,280
+already been loaded
+
+118
+00:03:15,280 --> 00:03:17,599
+and if it hasn't then we'll load the
+
+119
+00:03:17,599 --> 00:03:19,840
+chunk
+
+120
+00:03:20,400 --> 00:03:22,080
+lastly we check every coordinates in the
+
+121
+00:03:22,080 --> 00:03:23,519
+coordinates that have been loaded
+
+122
+00:03:23,519 --> 00:03:25,200
+that is not part of the coordinates that
+
+123
+00:03:25,200 --> 00:03:26,799
+should be loaded
+
+124
+00:03:26,799 --> 00:03:28,400
+then we add into the deleting chunk
+
+125
+00:03:28,400 --> 00:03:30,159
+array and for each coordinates in the
+
+126
+00:03:30,159 --> 00:03:32,239
+deleting chunk array we call it
+
+127
+00:03:32,239 --> 00:03:34,560
+chunk node's save function then we
+
+128
+00:03:34,560 --> 00:03:36,560
+remove its coordinates and its chunk
+
+129
+00:03:36,560 --> 00:03:40,560
+node from the respective arrays
+
+130
+00:03:40,720 --> 00:03:42,640
+and that concludes the code for chunk
+
+131
+00:03:42,640 --> 00:03:44,480
+loading
+
+132
+00:03:44,480 --> 00:03:46,319
+i also wrote this project in c-sharp and
+
+133
+00:03:46,319 --> 00:03:48,000
+the links are in the description so if
+
+134
+00:03:48,000 --> 00:03:48,480
+you want to
+
+135
+00:03:48,480 --> 00:03:50,080
+play around with the code or add it to
+
+136
+00:03:50,080 --> 00:04:01,760
+your own project you can do that

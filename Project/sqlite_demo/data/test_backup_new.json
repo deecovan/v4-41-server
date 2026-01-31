@@ -1,0 +1,59 @@
+[
+	{
+		"name": "company",
+		"row_array": [
+			{
+				"address": "Baltimore",
+				"age": 23,
+				"id": 3,
+				"name": "Teddy",
+				"salary": 20200.0
+			},
+			{
+				"address": "Richmond",
+				"age": 25,
+				"id": 4,
+				"name": "Mark",
+				"salary": 65200.0
+			},
+			{
+				"address": "Texas",
+				"age": 30,
+				"id": 5,
+				"name": "Robert",
+				"salary": 65200.0
+			},
+			{
+				"address": "Atlanta",
+				"age": 63,
+				"id": 6,
+				"name": "Julia",
+				"salary": 65200.0
+			},
+			{
+				"address": "New-York",
+				"age": 13,
+				"id": 7,
+				"name": "Amanda",
+				"salary": 65200.0
+			}
+		],
+		"sql": "CREATE TABLE company (id INTEGER PRIMARY KEY NOT NULL,name text NOT NULL,age INTEGER NOT NULL,address char(50),salary real)",
+		"type": "table"
+	},
+	{
+		"name": "increase_salary_after_employee_termination",
+		"sql": "CREATE TRIGGER increase_salary_after_employee_termination AFTER DELETE ON company BEGIN UPDATE company SET salary = salary + 100;END",
+		"type": "trigger"
+	},
+	{
+		"name": "cheapest_employee",
+		"sql": "CREATE VIEW cheapest_employee AS SELECT id, name FROM company WHERE salary = (SELECT MIN(salary) FROM company) LIMIT 1",
+		"type": "view"
+	},
+	{
+		"name": "idx_name",
+		"sql": "CREATE INDEX idx_name ON company(name)",
+		"type": "index"
+	}
+]
