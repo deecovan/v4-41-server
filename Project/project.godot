@@ -16,7 +16,7 @@ general/updates_per_second=30
 
 config/name="Add Free"
 config/version="0.1.4"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 run/max_fps=30
 
 [autoload]
