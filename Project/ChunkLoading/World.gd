@@ -2,28 +2,28 @@ extends Node2D
 
 #I want each chunk to have a parent node which is going to be the chunknode.
 #It's going to be instanced in everychunk that hasn't been loaded.
-const chunknode = preload("res://Prototypes/ChunkLoading/ChunkNode.tscn")
+const chunknode = preload("res://ChunkLoading/ChunkNode.tscn")
 
 #References to the player so I can track the location.
-export (NodePath) var player_path
+@export var player_path: NodePath
 var player
 
 #The render distance in the max length and bredth of chunks that can be loaded.
 #the chunk size is the size of the chunk obviously.
 #current chunk stores the current chunk the player is in.
-export (int) var render_distance = 3
-export (float) var chunk_size = 80
+@export var render_distance: int = 3
+@export var chunk_size: float = 80
 var current_chunk = Vector2()
 var previous_chunk = Vector2()
 var chunk_loaded = false
 
 #revolution distance is the distance at which the player must move on the axis in chunk coords
 #in order for one revolution to be achived.
-export (bool) var circumnavigation = false
-export (float) var revolution_distance = 8
+@export var circumnavigation: bool = false
+@export var revolution_distance: float = 8
 
-onready var active_coord = []
-onready var active_chunks = []
+@onready var active_coord = []
+@onready var active_chunks = []
 
 #In the ready func the world script checks if the chunks within the render distance have been loaded
 #and if not then they are loaded
@@ -78,7 +78,7 @@ func load_chunk():
 			#loading chunks stores the coords that are in the new render chunk
 			#this if statement makes sure that only the coords that are not already active are loaded
 			if active_coord.find(chunk_coords) == -1:
-				var chunk = chunknode.instance()
+				var chunk = chunknode.instantiate()
 				chunk.position = chunk_coords * chunk_size
 				active_chunks.append(chunk)
 				active_coord.append(chunk_coords)
@@ -93,9 +93,10 @@ func load_chunk():
 			deleting_chunks.append(x)
 	for x in deleting_chunks:
 		var index = active_coord.find(x)
-		active_chunks[index].save()
-		active_chunks.remove(index)
-		active_coord.remove(index)
+		if active_chunks[index] != null:
+			active_chunks[index].save()
+		active_chunks.remove_at(active_chunks.find(index))
+		active_coord.remove_at(active_chunks.find(index))
 	
 	chunk_loaded = true
 

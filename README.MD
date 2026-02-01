@@ -6,6 +6,7 @@
 - Start implement Server solution
 - Delete sqlite_demo 
   - Use stand-alone v4-41-sqlite repo
+- Working with bugs
 
 ### SQLITE
 - Add SQLite plugin Update to 4.5.0 due to requirements

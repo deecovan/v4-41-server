@@ -1,27 +1,43 @@
-[gd_scene load_steps=4 format=3 uid="uid://dghluvumkrosd"]
+[gd_scene load_steps=5 format=3 uid="uid://dghluvumkrosd"]
 
-[sub_resource type="Resource" id="Resource_5m7ab"]
-metadata/__load_path__ = "res://Prototypes/ChunkLoading/World.gd"
-
-[sub_resource type="Resource" id="Resource_md14q"]
-metadata/__load_path__ = "res://Prototypes/ChunkLoading/DemoPlayer.gd"
+[ext_resource type="Script" uid="uid://bumjxebocecg3" path="res://ChunkLoading/World.gd" id="1_fc5q6"]
+[ext_resource type="Script" uid="uid://rnmh1psol117" path="res://ChunkLoading/DemoPlayer.gd" id="1_md14q"]
+[ext_resource type="Texture2D" uid="uid://i6h2vn1r0m7j" path="res://ChunkLoading/godot_3d_plushie.png" id="2_r2y72"]
 
 [sub_resource type="RectangleShape2D" id="1"]
-size = Vector2(41.9534, 39.737)
+size = Vector2(458, 496)
 
 [node name="World" type="Node2D"]
-script = SubResource("Resource_5m7ab")
+script = ExtResource("1_fc5q6")
 player_path = NodePath("Player")
-render_distance = 1
+render_distance = 4
+chunk_size = 300.0
 
-[node name="Player" type="KinematicBody2D" parent="."]
-position = Vector2(440.023, 247.69)
+[node name="Player" type="RigidBody2D" parent="."]
 z_index = 1
-script = SubResource("Resource_md14q")
+position = Vector2(440.023, 247.69)
+gravity_scale = 0.0
+script = ExtResource("1_md14q")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+texture = ExtResource("2_r2y72")
 
 [node name="Box" type="CollisionShape2D" parent="Player"]
 shape = SubResource("1")
+debug_color = Color(0.8862745, 0, 0.47843137, 0.26666668)
 
 [node name="Cam" type="Camera2D" parent="Player"]
-current = true
-smoothing_enabled = true
+zoom = Vector2(0.1, 0.1)
+
+[node name="Label" type="Label" parent="Player"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.02301
+offset_top = 24.309998
+offset_right = 28.97699
+offset_bottom = 47.309998
+grow_horizontal = 2
+size_flags_horizontal = 4
+text = "xxx yyy"
+horizontal_alignment = 1

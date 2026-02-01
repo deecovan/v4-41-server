@@ -12,10 +12,17 @@ func start(_chunk_coords):
 		WorldSave.add_chunk(chunk_coords)
 	else:
 		chunk_data = WorldSave.retrive_data(chunk_coords)
-		modulate = chunk_data[0]
+		if chunk_data.size():
+			modulate = chunk_data[0]
+		else: 
+			color()
+			WorldSave.add_chunk(chunk_coords)
 
 func color():
-	colors = Color(rand_range(0.3, 1), rand_range(0.3, 1), rand_range(0.3, 1))
+	colors = Color(
+		randf_range(0.3, 1.0), 
+		randf_range(0.3, 1.0), 
+		randf_range(0.3, 1.0))
 	modulate = colors
 	chunk_data.append(colors)
 

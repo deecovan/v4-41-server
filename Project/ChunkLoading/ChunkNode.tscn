@@ -1,21 +1,12 @@
 [gd_scene load_steps=2 format=3 uid="uid://qkjydw7j162s"]
 
-[sub_resource type="Resource" id="Resource_hqhl2"]
-metadata/__load_path__ = "res://Prototypes/ChunkLoading/ChunkNode.gd"
+[ext_resource type="Script" uid="uid://cgudk6vwq4q7f" path="res://ChunkLoading/ChunkNode.gd" id="1_n3vt4"]
 
 [node name="ChunkNode" type="Node2D"]
-script = SubResource("Resource_hqhl2")
+script = ExtResource("1_n3vt4")
 
 [node name="Bruh" type="ColorRect" parent="."]
-rect_min_size = Vector2(75, 75)
-__meta__ = {
-"_edit_use_anchors_": false
-}
+custom_minimum_size = Vector2(300, 300)
 
 [node name="Coords" type="Label" parent="."]
 modulate = Color(0, 0, 0, 1)
-margin_right = 40.0
-margin_bottom = 14.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
